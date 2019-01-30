@@ -35,7 +35,7 @@
 						    <marquee direction="up" :interval="2000">
 						      	<marquee-item v-for="(item, index) in shopMessage" :key="index" @click.native="" class="align-middle">
 						      		<img class="m-bugle" style="display:inline-block;margin-right:5px;" src="/static/img/bugle.png">
-						      		<span style="vertical-align: middle;">hello world {{item}}</span>
+						      		<span style="vertical-align: middle;">{{item.title}}</span>
 						      	</marquee-item>
 						    </marquee>
 				    	</div>
@@ -100,7 +100,7 @@
 </template>
 <script>
 require('./index.less')
-import {shop,shopBanner,shopCat,floor1,recommendGoods} from '../../data/data.js'
+// import {shop,shopBanner,shopCat,floor1,recommendGoods} from '../../data/data.js'
 
 import SharePopup from '../../components/sharePopup.vue'
 import CatBox from '../../components/catBox.vue'
@@ -135,12 +135,12 @@ export default {
 	data() {
 		return {
 			// shop: shop,
-			shopBanner: shop.banners,
-			shopCat: shop.icons,
-			shopMessage: shop.messages,
-			floor1: floor1,
-			specials: shop.onSaleProducts,
-			recommendGoods: recommendGoods,
+			// shopBanner: shop.banners,
+			// shopCat: shop.icons,
+			// shopMessage: shop.messages,
+			// floor1: floor1,
+			// specials: shop.onSaleProducts,
+			// recommendGoods: shop.groomProducts,
 		}
 	},
 	created(){
@@ -152,7 +152,22 @@ export default {
 		// })
 		shop(){
 			return this.$store.getters.shop
-		}
+		},
+		shopBanner(){
+			return this.$store.getters.shop.banners && this.$store.getters.shop.banners.map((item, index) => { item['img'] = item.imgUrl;return item;})
+		},
+		shopCat(){
+			return this.$store.getters.shop.icons
+		},
+		shopMessage(){
+			return this.$store.getters.shop.messages
+		},
+		specials(){
+			return this.$store.getters.shop.onSaleProducts
+		},
+		recommendGoods(){
+			return this.$store.getters.shop.groomProducts
+		},
 	},
 	methods: {
 		initShop() {

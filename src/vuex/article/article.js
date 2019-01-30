@@ -48,18 +48,18 @@ const actions = {
     // })
     commit({
       type: types.UPDATE_ARTICLES,
-      articles
+      articles: articles.data.data,
     })
   },
-  async getArticle({dispatch, commit, state}) {
+  async getArticle({dispatch, commit, state}, payload) {
     dispatch('showLoading')
-    let article = await api.getArticle()
+    let article = await api.getArticle(payload)
     // let recArtGoods = await api.getRecommendGoods()
     // let recArtArticles = await api.getRecommendArticles()
     dispatch('hideLoading')
     commit({
       type: types.UPDATE_ARTICLE,
-      article
+      article: article.data.data,
     })
     // commit({
     //   type: types.UPDATE_RECGOODS,
